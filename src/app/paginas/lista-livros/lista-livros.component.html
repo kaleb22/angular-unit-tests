@@ -1,19 +1,23 @@
 <section class="cabecalho">
   <h2>Minhas leituras<span class="linha-colorida"></span></h2>
-  <button routerLink="/formulario">
+  <button data-testId="btn-novo-card" routerLink="/formulario">
     <i class="material-icons">add</i>
     Criar novo card
   </button>
 </section>
 @for (genero of generos; track genero) {
-  <section class="generos" [ngClass]="genero.id">
-    <h3>{{ genero.value }}<span class="linha-colorida" [ngClass]="genero.id"></span></h3>
+  <section data-testId="section-genero" class="generos" [ngClass]="genero.id">
+    <h3>
+      {{ genero.value
+      }}<span class="linha-colorida" [ngClass]="genero.id"></span>
+    </h3>
     <div class="livros-genero">
-      @for (livro of livroService.obterLivrosPorGenero(genero.id); track livro) {
-        <app-livro
-          [livro]="livro"
-        />
+      @for (
+        livro of livroService.obterLivrosPorGenero(genero.id);
+        track livro
+      ) {
+        <app-livro [livro]="livro" />
       }
-      </div>
+    </div>
   </section>
 }
